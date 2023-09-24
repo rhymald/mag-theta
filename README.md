@@ -3,6 +3,10 @@ P2P gaming server designing, 8th attempt
 
 # V-lang
 
+- Test: `v -stats test .`
+- Run: `v run .`
+- Build: `v -o binary-filename .`
+
 Install V:
 ```bash
 sudo apt-get install gcc make

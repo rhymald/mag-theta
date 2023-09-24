@@ -11,9 +11,16 @@ mut:
 }
 
 fn main() {
+    println('~~~~ Running... ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    println('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     stream := primitives.init_stream('fire')
     println(json.encode(stream))
+    println('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
+    example()
+}
+
+fn example() {
     s := '[{"name":"Frodo", "born":25}, {"name":"Bobby", "born":10}]'
     mut users := json.decode([]User, s) or {
         eprintln('Failed to parse json')
@@ -22,7 +29,6 @@ fn main() {
     for user in users {
         println('${user.name}: ${user.born}')
     }
-    println('')
     for i, mut user in users {
         println('${i}) ${user.name}')
         if !user.can_register() {
@@ -34,7 +40,6 @@ fn main() {
         user.register()
     }
     // Let's encode users again just for fun
-    println('')
     println(json.encode(users))
 }
 

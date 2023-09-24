@@ -1,1 +1,3 @@
 module funcs
+
+import time
