@@ -1,6 +1,7 @@
 module main
 
 import json
+import primitives
 
 struct User {
     name string
@@ -10,6 +11,9 @@ mut:
 }
 
 fn main() {
+    stream := primitives.init_stream('fire')
+    println(json.encode(stream))
+
     s := '[{"name":"Frodo", "born":25}, {"name":"Bobby", "born":10}]'
     mut users := json.decode([]User, s) or {
         eprintln('Failed to parse json')
