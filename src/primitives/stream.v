@@ -4,19 +4,20 @@ import funcs
 import math
 
 struct Stream {
+	e string
 mut:
 	c f64
 	a f64
 	d f64
-	e string
 }
 
 pub fn init_stream(e string) Stream {
-	cre, alt, des := math.phi, funcs.init_f64(), math.pi
+	cre, alt, des := funcs.init_f64()+funcs.init_f64(), funcs.init_f64()+funcs.init_f64(), funcs.init_f64()+funcs.init_f64()
+	vector := math.sqrt( cre*cre + alt*alt + des*des )
 	str := Stream{
-		c: funcs.round(1 / cre)
-		a: funcs.round(2 / alt)
-		d: funcs.round(3 / des)
+		c: funcs.round(cre/vector)
+		a: funcs.round(alt/vector)
+		d: funcs.round(des/vector)
 		e: e
 	}
 	return str

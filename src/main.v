@@ -13,8 +13,8 @@ mut:
 fn main() {
     println('~~~~ Running... ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     println('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    stream := primitives.init_stream('fire')
-    println(json.encode(stream))
+    stream := primitives.init_stream(primitives.elem(2))
+    println('Stream generated: ${json.encode(stream)}')
     println('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
     example()
