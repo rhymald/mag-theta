@@ -1,8 +1,8 @@
 module primitives
 
 const (
-	elemlist := ['◌', '🌪', '🔥']//, '🪨', '🧊', '🌑', '🩸', '🎶', '☀️']
-	physlist := ['◌', '🌱', '🪵', '🪨', '🛡']
+	elemlist := ['🌑', '🌪', '🔥', '🪨', '🧊', '🩸', '🎶', '☀️']
+	physlist := ['🌑', '🌱', '🪵', '🪨', '🛡 ']
 )
 
 pub fn elem(i int) string {
@@ -13,4 +13,12 @@ pub fn elem(i int) string {
 pub fn phys(i int) string {
 	if i > 0 && i < physlist.len { return physlist[i] }
 	return 'error'
+}
+
+pub fn elems() []string {
+	return elemlist
+}
+
+pub fn physs() []string {
+	return physlist
 }

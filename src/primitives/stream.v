@@ -2,6 +2,7 @@ module primitives
 
 import funcs
 import math
+import json
 
 struct Stream {
 	e string
@@ -21,4 +22,8 @@ pub fn init_stream(e string) Stream {
 		e: e
 	}
 	return str
+}
+
+fn (str Stream) tojson() string {
+	return json.encode(str)
 }

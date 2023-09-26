@@ -1,6 +1,6 @@
 module funcs
 
-fn test_me() {
+fn test_all() {
 	println('>>---> Start: ${init_epoch()}')
 	for _ in 0..12 {
 		print(round(init_f64()))
