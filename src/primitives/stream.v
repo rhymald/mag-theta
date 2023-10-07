@@ -4,9 +4,9 @@ import funcs
 import math
 import json
 
-struct Stream {
+pub struct Stream {
 	e string
-mut:
+pub:
 	c f64
 	a f64
 	d f64
