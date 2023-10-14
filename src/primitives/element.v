@@ -1,7 +1,6 @@
 module primitives
 
 const (
-	nullelement := '🌑'
 	nullindex := 4
 	elemlist := ['🛡', '🪨', '🪵', '🌱', '🌑', '🌪', '🔥', '🪨', '🧊', '🩸', '🎶', '☀️']
 	elemnames := ['forged', 'solid', 'plated', 'flesh', 'empty', 'air', 'fire', 'stone', 'water', 'mallom', 'noise', 'resonance']
@@ -19,3 +18,5 @@ pub fn elems() map[string]string {
 	} 
 	return buffer
 }
+
+pub fn null_elem() string { return '--' }

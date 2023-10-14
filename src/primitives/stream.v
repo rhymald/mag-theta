@@ -13,11 +13,11 @@ pub:
 }
 
 struct Stream_Formatted {
-	element string
-	swiftness f64
-	power f64
-	structure f64
-	flexibility f64
+	element string // depends on major
+	spread f64 // aoe, swiftness, velocity
+	power f64 // penetration, damage
+	toughness f64 // stability, structure
+	agility f64 // control, precision
 }
 
 pub fn init_stream() Stream {
@@ -33,11 +33,23 @@ pub fn init_stream() Stream {
 }
 
 fn (str Stream) tojson() string {
-	return json.encode(Stream_Formatted{
-		element: elem(0) // dummy
-		swiftness: str.air
-		power: str.flm 
-		structure: str.stn
-		flexibility: str.wtr
-	})
+	result := Stream_Formatted{
+		element: str.element() // dummy
+		spread: funcs.round(str.air + 1)
+		power: funcs.round(str.flm + 1)
+		toughness: funcs.round(str.stn + 1)
+		agility: funcs.round(str.wtr + 1)
+	}
+	return json.encode_pretty(result)
+}
+
+pub fn (str Stream) len() f64 { return math.sqrt(str.stn*str.stn+str.air*str.air+str.flm*str.flm+str.wtr*str.wtr) }
+pub fn (str Stream) element() string {
+	max := math.max( math.max( str.stn, str.air ), math.max( str.flm, str.wtr ) )
+	if max < str.len() * math.sqrt( 0.5 ) { return null_elem() }
+	if max == str.air { return elem(1) }
+	if max == str.flm { return elem(2) }
+	if max == str.stn { return elem(3) }
+	if max == str.wtr { return elem(4) }
+	return elem(0)
 }
