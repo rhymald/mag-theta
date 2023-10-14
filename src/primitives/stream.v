@@ -34,22 +34,33 @@ pub fn init_stream() Stream {
 
 fn (str Stream) tojson() string {
 	result := Stream_Formatted{
-		element: str.element() // dummy
-		spread: funcs.round(str.air + 1)
-		power: funcs.round(str.flm + 1)
-		toughness: funcs.round(str.stn + 1)
-		agility: funcs.round(str.wtr + 1)
+		element: str.element()
+		spread: funcs.round(str.air)
+		power: funcs.round(str.flm)
+		toughness: funcs.round(str.stn)
+		agility: funcs.round(str.wtr)
 	}
-	return json.encode_pretty(result)
+	return json.encode(result)
 }
 
 pub fn (str Stream) len() f64 { return math.sqrt(str.stn*str.stn+str.air*str.air+str.flm*str.flm+str.wtr*str.wtr) }
 pub fn (str Stream) element() string {
-	max := math.max( math.max( str.stn, str.air ), math.max( str.flm, str.wtr ) )
-	if max < str.len() * math.sqrt( 0.5 ) { return null_elem() }
-	if max == str.air { return elem(1) }
-	if max == str.flm { return elem(2) }
-	if max == str.stn { return elem(3) }
-	if max == str.wtr { return elem(4) }
-	return elem(0)
+	major := math.max( math.max( str.stn, str.air ), math.max( str.flm, str.wtr ) )
+	all := [str.stn, str.air, str.flm, str.wtr]
+	mut minor := 0.0
+	for each in all { if each != major && each > minor { minor = each }}
+	mut element := null_elem()
+	if major == str.air { element = elem(1) }
+	if major == str.flm { element = elem(2) }
+	if major == str.stn { element = elem(3) }
+	if major == str.wtr { element = elem(4) }
+	leng := str.len()
+	if major >= leng/math.phi && minor >= leng/math.sqrt(3) {
+		if minor == str.air && element != elem(3) { element += elem(1) }
+		if minor == str.flm && element != elem(4) { element += elem(2) }
+		if minor == str.stn && element != elem(1) { element += elem(3) }
+		if minor == str.wtr && element != elem(4) { element += elem(4) }			
+	}
+	if major < leng/math.sqrt(2) { return null_elem() }
+	return element
 }

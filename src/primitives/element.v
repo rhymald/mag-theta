@@ -2,7 +2,7 @@ module primitives
 
 const (
 	nullindex := 4
-	elemlist := ['🛡', '🪨', '🪵', '🌱', '🌑', '🌪', '🔥', '🪨', '🧊', '🩸', '🎶', '☀️']
+	elemlist := ['🛡', '🪨', '🪵', '🌱', '🌑', '🌪 ', '🔥', '🪨', '🧊', '🩸', '🎶', '☀️']
 	elemnames := ['forged', 'solid', 'plated', 'flesh', 'empty', 'air', 'fire', 'stone', 'water', 'mallom', 'noise', 'resonance']
 )
 
