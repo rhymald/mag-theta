@@ -1,24 +1,21 @@
 module primitives
 
 const (
-	elemlist := ['🌑', '🌪', '🔥', '🪨', '🧊', '🩸', '🎶', '☀️']
-	physlist := ['🌑', '🌱', '🪵', '🪨', '🛡 ']
+	nullelement := '🌑'
+	nullindex := 4
+	elemlist := ['🛡', '🪨', '🪵', '🌱', '🌑', '🌪', '🔥', '🪨', '🧊', '🩸', '🎶', '☀️']
+	elemnames := ['forged', 'solid', 'plated', 'flesh', 'empty', 'air', 'fire', 'stone', 'water', 'mallom', 'noise', 'resonance']
 )
 
 pub fn elem(i int) string {
-	if i >= 0 && i < elemlist.len { return elemlist[i] }
+	if i >= -nullindex && i < elemlist.len-nullindex { return elemlist[i+nullindex] }
 	return 'error'
 }
 
-pub fn phys(i int) string {
-	if i >= 0 && i < physlist.len { return physlist[i] }
-	return 'error'
-}
-
-pub fn elems() []string {
-	return elemlist
-}
-
-pub fn physs() []string {
-	return physlist
+pub fn elems() map[string]string {
+	mut buffer := map[string]string{}
+	for i, each in elemlist {
+		buffer[elemnames[i]] = each
+	} 
+	return buffer
 }
