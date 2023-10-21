@@ -23,13 +23,14 @@ struct Stream_Formatted {
 	power f64 // penetration, damage
 	toughness f64 // stability, structure
 	agility f64 // control, precision
+	length f64
 }
 
 pub fn init_stream() Stream {
-	ai := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()
-	fi := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()
-	st := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()
-	wa := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()
+	ai := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()+2
+	fi := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()+2
+	st := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()+2
+	wa := funcs.init_f64()+funcs.init_f64()+funcs.init_f64()+2
 	vector := math.sqrt( ai*ai + fi*fi + st*st + wa*wa )
 	str := Stream{
 		air: funcs.round(ai/vector)
@@ -40,7 +41,7 @@ pub fn init_stream() Stream {
 	return str
 }
 
-fn (str Stream) tojson() string {
+pub fn (str Stream) tojson() string {
 	element, degree := str.element()
 	result := Stream_Formatted{
 		element: element
@@ -49,6 +50,7 @@ fn (str Stream) tojson() string {
 		power: funcs.round(str.flm)
 		toughness: funcs.round(str.stn)
 		agility: funcs.round(str.wtr)
+		length: funcs.round(str.len())
 	}
 	return json.encode(result)
 }
@@ -81,4 +83,14 @@ pub fn (str Stream) element() (string, string) {
 	if major < leng/math.sqrt(2) && minor < leng/math.sqrt(3) { return element, degrees[1] } // about to get affinity
 	if degree == '' { degree = degrees[2] } // attuned to an element
 	return element, degree
+}
+
+pub fn (str Stream) modify_scale(l f64) Stream {
+	mod := l / str.len()
+	return Stream{
+		air: funcs.round(str.air * mod)
+		flm: funcs.round(str.flm * mod)
+		stn: funcs.round(str.stn * mod)
+		wtr: funcs.round(str.wtr * mod)
+	}
 }

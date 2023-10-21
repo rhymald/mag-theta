@@ -4,7 +4,8 @@ module play
 
 fn test_player() {
 	base := init_basic_stats()
-	println(base)
+	println('Body:      ${base.body.tojson()}')
+	for i, stream in base.nrgy { println('Stream #${i+1}: ${stream.tojson()}') }
 	atts := base.init_attributes()
 	println(atts)
 }
