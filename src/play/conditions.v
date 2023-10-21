@@ -12,20 +12,20 @@ mut:
 
 fn init_conditions() Conditions {
 	return Conditions{
-		can_move: 0
-		can_regen: 0
-		can_cast: 0
+		can_move: -1
+		can_regen: -1
+		can_cast: -1
 	}
 }
 
-fn (cond Conditions) block() {
+fn (mut cond Conditions) block() {
 	cond.can_cast = -cond.can_cast-1
 	cond.can_move = -cond.can_move-1
 	cond.can_regen = -cond.can_regen-1
 }
 
-fn (cond Conditions) unblock() {
-	cond.can_cast = -cond.can_cast+1
-	cond.can_move = -cond.can_move+1
-	cond.can_regen = -cond.can_regen+1
+fn (mut cond Conditions) unblock() {
+	cond.can_cast = -cond.can_cast-1
+	cond.can_move = -cond.can_move-1
+	cond.can_regen = -cond.can_regen-1
 }

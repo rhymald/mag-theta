@@ -94,3 +94,8 @@ pub fn (str Stream) modify_scale(l f64) Stream {
 		wtr: funcs.round(str.wtr * mod)
 	}
 }
+
+pub fn (str Stream) capacity() int {
+	mean := math.pi / (1/str.air + 1/str.stn + 1/str.flm + 1/str.wtr)
+	return int(math.round( math.log(mean + 1.1479) / math.log(1.1479) * math.cbrt(1+mean) ))
+}
