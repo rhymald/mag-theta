@@ -1,8 +1,8 @@
 module play 
 
-// import primitives
+import json
 
-fn test_player() {
+fn test_chunks() {
 	base := init_basic_stats()
 	println(' >>> Body:${base.body.tojson()}')
 	for i, stream in base.nrgy { println('Stream[${i+1}]:${stream.tojson()}') }
@@ -14,4 +14,9 @@ fn test_player() {
 	println(conds)
 	cons := base.init_consumables()
 	println(cons)
+}
+
+fn test_player() {
+	creature := init_creature()
+	println(creature.fancify())
 }
