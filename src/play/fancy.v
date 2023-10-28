@@ -16,7 +16,7 @@ struct Testiful_Player {
 }
 
 fn (your Creature) fancify() Testiful_Player {
-	mut strlist := []string{}
+	mut strlist := map[string]string{}
 	for each in your.base.nrgy {
 		strlist[json.encode(each)] = each.tojson()
 	}
