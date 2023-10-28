@@ -3,11 +3,9 @@ module play
 import primitives
 
 struct Consumables {
-	pool primitives.Pool
-	health primitives.Health
-	// unspent []Effect
+	pool primitives.Pool // consume online as fuel
+	health primitives.Health // consume offline as exp
 }
-
 
 fn (base BasicStats) init_consumables() Consumables {
 	return Consumables{

@@ -19,7 +19,7 @@ fn init_basic_stats() BasicStats {
 		i := funcs.init_epoch() % streams.len
 		streams[i] = streams[i].modify_scale(streams[i].len() + 1) 
 	}
-	mut buffer := BasicStats{ 
+	buffer := BasicStats{ 
 		body: primitives.init_stream(),
 		nrgy: streams,
 	}

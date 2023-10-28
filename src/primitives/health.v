@@ -1,7 +1,6 @@
 module primitives
 
 pub struct Health {
-mut:
 	hp []int // %amount of incomming / outgoing heals / attacks
 	dmg []f64 // amount of incomming / outgoing heals / attacks
 	ticks []int // count of incomming / outgoing heals / attacks

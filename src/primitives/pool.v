@@ -2,7 +2,6 @@ module primitives
 
 pub struct Pool {
 	max_pool []int
-mut:
 	inner []int // predictable weight
 	outer map[string]map[string]int // unpred weight by time
 }

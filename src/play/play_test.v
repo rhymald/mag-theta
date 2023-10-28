@@ -12,6 +12,6 @@ fn test_player() {
 	println(conds)
 	conds.unblock()
 	println(conds)
-	mut cons := base.init_consumables()
+	cons := base.init_consumables()
 	println(cons)
 }
