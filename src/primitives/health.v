@@ -1,17 +1,22 @@
 module primitives
 
 pub struct Health {
-	hp []int // %amount of incomming / outgoing heals / attacks
-	dmg []f64 // amount of incomming / outgoing heals / attacks
-	ticks []int // count of incomming / outgoing heals / attacks
-	suffer []f64 // time of incomming / outgoing boons / debuffs normalized
+mut:
+	// hp []int
+	dmg map[string][]int
+	ticks map[string][]int
+	suffer []int
 }
 
 pub fn init_health() Health {
+	// [4]any{ +in, -in, +out, -out } by basic elem
+	mut buffer_dmgs := map[string][]int{}
+	mut buffer_ticks := map[string][]int{}
+	buffer_dmgs[elem(5)] = [618, 0, 0, 0]
+	buffer_ticks[elem(0)] = [0, 0, 0, 0]
 	return Health{
-		hp: [618, 0, 0, 0]
-		dmg: [0.0, 0.0, 0.0, 0.0]
-		ticks: [0, 0, 0, 0]
-		suffer: [0.0, 0.0, 0.0, 0.0]
+		dmg: buffer_dmgs
+		ticks: buffer_ticks
+		suffer: [0, 0, 0, 0]
 	}
 }
