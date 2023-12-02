@@ -16,7 +16,7 @@ fn test_effects() {
 	for i in 0..16 {
 		element := int(funcs.init_epoch() % 8)
 		effects = effects.with_dmg(elem(element), funcs.init_f64())
-		// funcs.init_delay(10)
+		funcs.init_delay(3)
 	}
 	println(effects)
 }
