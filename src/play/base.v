@@ -15,7 +15,8 @@ fn init_basic_stats() BasicStats {
 	if luck >= 5 { ecount = 4 } else { ecount = 3 }
 	if luck == 0 { ecount = 2 } ; if luck == 9 { ecount = 5 }
 	for _ in 0..ecount { streams << primitives.init_stream() }
-	for _ in 0..(5-ecount) { 
+	improves := 5-ecount
+	for _ in 0..improves { 
 		i := funcs.init_epoch() % streams.len
 		streams[i] = streams[i].modify_scale(streams[i].len() + 1) 
 	}
