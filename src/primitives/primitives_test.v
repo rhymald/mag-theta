@@ -1,6 +1,7 @@
 module primitives
 
 import funcs
+import json
 
 fn test_elements() {
 	print('>>--> List all elements:')
@@ -15,8 +16,15 @@ fn test_effects() {
 	mut effects := init_effects()
 	for i in 0..16 {
 		element := int(funcs.init_epoch() % 8)
-		effects = effects.with_dmg(elem(element), funcs.init_f64())
+		effects = effects.with_damage(elem(element), funcs.init_f64())
+		funcs.init_delay(16 + 256*funcs.init_f64())
+		effects = effects.with_gain_dot( (-element+4)%8, funcs.init_f64(), funcs.init_f64()*3000)
 		funcs.init_delay(16 + 256*funcs.init_f64())
 	}
-	println(effects)
+	// println(json.encode(effects))
+	for ts, each in effects {
+		for kind, effect in each {
+			println('      | ${ts} | ${kind} | ${json.encode(effect)} ')
+		}
+	}
 }
