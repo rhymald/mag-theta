@@ -4,6 +4,8 @@ import math
 import funcs
 
 const (
+	timestep = 1000
+	portion = 1000
 	instant = [
 		"Damage", // ( +elem: amount )x0..len(elements)
 		       // ( -elem: amount )x0..1
@@ -16,13 +18,13 @@ const (
 
 fn init_effect_dmg(element string, value f64) map[string]int {
 	mut buffer := map[string]int
-	buffer[element] = int(math.round( value * 1000 ))
+	buffer[element] = int(math.round( value * portion ))
 	return buffer
 }
 
 fn init_effect_gain_dot(element int, weight f64) map[int]int {
 	mut buffer := map[int]int
-	buffer[element] = int(math.round( weight * 1000 ))
+	buffer[element] = int(math.round( weight * portion ))
 	return buffer
 }
 
@@ -33,16 +35,16 @@ fn init_effects() map[i64]map[string]Effect { return map[i64]map[string]Effect{}
 fn (effects map[i64]map[string]Effect) with_dmg(elem string, dmg f64) map[i64]map[string]Effect {
 	mut buffer := effects.clone() 
 	mut damages := init_effect_dmg(elem, dmg)
-	ts := funcs.init_epoch() / 382 * 382
+	ts := funcs.init_epoch() / timestep * timestep
 	mut bbuffer := map[string]Effect{}
 	if ts in buffer { bbuffer = buffer[ts].clone() }
 	if instant[0] in bbuffer { 
 		mut sum := map[string]int{}
 		bbbuffer := bbuffer[instant[0]]
-		elementlist := elems()
-		for _, element in elementlist {
+		for ei in nullindex..(elemlist.len) {
+			element := elemlist[ei]
 			if bbbuffer is map[string]int {
-				newdmg := bbbuffer[element] + damages[element]
+				newdmg := (*bbbuffer)[element] + damages[element]
 				if newdmg != 0 { sum[element] = newdmg }
 			}
 		}

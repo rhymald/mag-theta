@@ -20,3 +20,4 @@ pub fn elems() map[string]string {
 }
 
 pub fn null_elem() string { return '--' }
+// pub fn energ_elems() []string { return elemlist[nullindex..(elemlist.len)] }
