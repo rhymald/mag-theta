@@ -4,7 +4,7 @@ import math
 import funcs
 
 const (
-	timestep = 1000
+	timestep = 64
 	portion = 1000
 	instant = [
 		"Damages", // ( +elem: amount )x0..len(elements)
@@ -79,4 +79,18 @@ fn (effects map[string]map[string]map[string]int) with_gain_dot(indelem int, wei
 	}
 	buffer[ts.str()] = bbuffer.clone()
 	return buffer
+}
+
+fn (effects map[string]map[string]map[string]int) consume() map[string]map[string]map[string]int {
+	mut buffer := effects.clone()
+	ts := (funcs.init_epoch()) / timestep * timestep
+	// mut actual := map[string]map[string]int{}
+	mut except := map[string]map[string]map[string]int{}
+	for t, effect in buffer { if ts - t.i64() > - timestep / 2 {
+		println('>>>>> [${ts - t.i64()}]Consuming: ${effect}')
+	} else {
+		println('>---> [${ts - t.i64()}]Keeping: ${effect}')
+		except[t] = effect.clone()
+	}}
+	return except
 }

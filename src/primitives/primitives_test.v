@@ -21,7 +21,12 @@ fn test_effects() {
 		effects = effects.with_gain_dot( (-element+4)%8, funcs.init_f64(), funcs.init_f64()*3000)
 		funcs.init_delay(16 + 256*funcs.init_f64())
 	}
-	// println(json.encode(effects))
+	for ts, each in effects {
+		for kind, effect in each {
+			println('      | ${ts} | ${kind} | ${json.encode(effect)} ')
+		}
+	}
+	effects = effects.consume()
 	for ts, each in effects {
 		for kind, effect in each {
 			println('      | ${ts} | ${kind} | ${json.encode(effect)} ')
